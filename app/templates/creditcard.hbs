@@ -1,0 +1,85 @@
+<script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.validation/1.13.1/jquery.validate.min.js"></script>
+
+<!-- If you're using Stripe for payments -->
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+<!-- Credit card form -->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div><img  src="http://i76.imgup.net/accepted_c22e0.png"/></div>
+            <h3 class="panel-title">Credit Card Valid: {{isValid}}</h3>
+        </div>
+        <div class="panel-body">
+          {{#bs-form  id="payment-form" model=this action="submit"}}
+
+          <div class="row">
+            <div class="col-xs-12">
+              {{#bs-form-group }}
+                <label for="cardType">CARD TYPE</label>
+                <div class="input-group">
+                  {{bs-input type="text" value=cardType placeholder="Card Type" data-stripe="cardType" autofocus=true readonly=true}}
+                  <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                </div>
+              {{/bs-form-group}}
+            </div>
+          </div>
+
+
+            <div class="row">
+              <div class="col-xs-12">
+                {{#bs-form-group validation=cardNumberValidation}}
+                  <label for="cardNumber">CARD NUMBER</label>
+                  <div class="input-group">
+                    {{bs-form-element property="cardNumber" placeholder="Valid Card Number" data-stripe="cardNumber" required=true}}
+
+                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                  </div>
+                {{/bs-form-group}}
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-xs-12">
+                {{#bs-form-group validation=cardHolderValidation}}
+                  <label for="cardNumber">CARD HOLDER</label>
+                  <div class="input-group">
+                      {{bs-form-element controlType="text" value=cardHolder property="cardHolder" placeholder="Card Holder's Name" data-stripe="cardHolder" required=true}}
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    </div>
+              {{/bs-form-group}}
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-xs-7 col-md-7">
+                {{#bs-form-group validation=cardExpiryValidation}}
+                  <label for="cardExpiry"><span class="hidden-xs">EXPIRATION</span><span class="visible-xs-inline">EXP</span> DATE</label>
+                  {{bs-form-element controlType="text" maxlength="5" property="cardExpiry" placeholder="MM / YY" data-stripe="cardExpiry" required=true}}
+                {{/bs-form-group}}
+              </div>
+
+              <div class="col-xs-5 col-md-5 pull-right">
+                {{#bs-form-group validation=cvCodeValidation}}
+                  <label for="cvCode">CV CODE</label>
+                  {{bs-form-element controlType="text" property="cvCode" placeholder="CVC" data-stripe="cvCode" required=true}}
+                {{/bs-form-group}}
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12">
+                {{bs-button class="btn btn-success btn-lg btn-block" defaultText="Submit Payment" type="primary" buttonType="submit"}}
+              </div>
+            </div>
+          <h1 class="panel-title">Credit Card Valid: {{isValid}}</h1>
+          {{/bs-form}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
